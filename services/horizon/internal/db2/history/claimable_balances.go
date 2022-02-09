@@ -125,7 +125,7 @@ type QClaimableBalances interface {
 
 // CountClaimableBalances returns the total number of claimable balances in the DB
 func (q *Q) CountClaimableBalances(ctx context.Context) (int, error) {
-	sql := sq.Select("count(*)").From("claimable_balances").Where(sq.NotEq{"cb.id": nil})
+	sql := sq.Select("count(*)").From("claimable_balances").Where(sq.NotEq{"claimable_balances.id": nil})
 
 	var count int
 	if err := q.Get(ctx, &count, sql); err != nil {
