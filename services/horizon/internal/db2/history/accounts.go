@@ -35,7 +35,7 @@ func (account AccountEntry) IsAuthClawbackEnabled() bool {
 }
 
 func (q *Q) CountAccounts(ctx context.Context) (int, error) {
-	sql := sq.Select("count(*)").From("accounts")
+	sql := sq.Select("count(*)").From("accounts").Where(sq.NotEq{"accounts.account_id": nil})
 
 	var count int
 	if err := q.Get(ctx, &count, sql); err != nil {

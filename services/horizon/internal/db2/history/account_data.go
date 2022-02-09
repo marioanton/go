@@ -10,7 +10,7 @@ import (
 )
 
 func (q *Q) CountAccountsData(ctx context.Context) (int, error) {
-	sql := sq.Select("count(*)").From("accounts_data")
+	sql := sq.Select("count(*)").From("accounts_data").Where(sq.NotEq{"accounts_data.ledger_key": nil})
 
 	var count int
 	if err := q.Get(ctx, &count, sql); err != nil {

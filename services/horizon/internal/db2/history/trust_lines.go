@@ -27,7 +27,7 @@ func (trustLine TrustLine) IsClawbackEnabled() bool {
 }
 
 func (q *Q) CountTrustLines(ctx context.Context) (int, error) {
-	sql := sq.Select("count(*)").From("trust_lines")
+	sql := sq.Select("count(*)").From("trust_lines").Where(sq.NotEq{"trust_lines.ledger_key": nil})
 
 	var count int
 	if err := q.Get(ctx, &count, sql); err != nil {
